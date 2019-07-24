@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, g
 from models.recipe import Recipe, RecipeSchema, Cuisine
 from lib.secure_route import secure_route
+from lib.helpers import is_unique
 
 api = Blueprint('recipes', __name__)
 
@@ -26,6 +27,8 @@ def show(recipe_id):
 def create():
     data = request.get_json()
     recipe, errors = recipe_schema.load(data)
+    if not is_unique(model=Recipe, key='name', value=data.get('name')):
+        errors['name'] = errors.get('name', []) +['Recipe may already exist - please check against current database or re-name your recipe']
     if errors:
         return jsonify(errors), 422
     # Adding cuisine

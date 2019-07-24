@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from models.user import User, UserSchema
+from lib.helpers import is_unique
 
 api = Blueprint('auth', __name__)
 user_schema = UserSchema()
@@ -8,6 +9,8 @@ user_schema = UserSchema()
 def register():
     data = request.get_json()
     user, errors = user_schema.load(data)
+    if not is_unique(model=User, key='username', value=data.get('username')):
+        errors['username'] = errors.get('username', []) +['Username already exists, please choose another']
     if errors:
         return jsonify(errors), 422
     user.save()
