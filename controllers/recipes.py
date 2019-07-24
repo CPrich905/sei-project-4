@@ -1,6 +1,6 @@
-from flask import Blueprint, jsonify, request
-from models.recipe import Recipe, RecipeSchema
-
+from flask import Blueprint, jsonify, request, g
+from models.recipe import Recipe, RecipeSchema, Cuisine
+from lib.secure_route import secure_route
 
 api = Blueprint('recipes', __name__)
 
@@ -22,16 +22,25 @@ def show(recipe_id):
 
 # CREATE
 @api.route('/recipes', methods=['POST'])
+@secure_route
 def create():
     data = request.get_json()
     recipe, errors = recipe_schema.load(data)
     if errors:
         return jsonify(errors), 422
+    # Adding cuisine
+    cuisines = data['cuisines_id']
+    for cuisine in cuisines:
+        recipe.cuisine.append(Cuisine.query.get(cuisine))
+    # Set current user as chef
+    recipe.chef = g.current_user
+
     recipe.save()
     return recipe_schema.jsonify(recipe), 201
 
 # EDIT
 @api.route('/recipes/<int:recipe_id>', methods=['PUT'])
+@secure_route
 def update(recipe_id):
     recipe = Recipe.query.get(recipe_id)
     if not recipe:
@@ -45,6 +54,7 @@ def update(recipe_id):
 
 # DELETE
 @api.route('/recipes/<int:recipe_id>', methods=['DELETE'])
+@secure_route
 def delete(recipe_id):
     recipe = Recipe.query.get(recipe_id)
     if not recipe:
