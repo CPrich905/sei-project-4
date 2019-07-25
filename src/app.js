@@ -1,17 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {BrowserRouter, Route } from 'react-router-dom'
+import {BrowserRouter, Route, Switch } from 'react-router-dom'
 
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
 import Homepage from './components/common/Homepage'
+import RecipesIndex from './components/recipes/RecipesIndex'
+import RecipeShow from './components/recipes/RecipeShow'
 
-fetch('/api/recipes')
+// fetch('/api/recipes')
 
 const App = () => {
   return(
     <BrowserRouter>
       <main>
-        <Route exact path="/" component={Homepage} />
-
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/recipes/:id" component={RecipeShow} />
+          <Route path="/recipes" component={RecipesIndex} />
+          <Route exact path="/" component={Homepage} />
+        </Switch>
       </main>
     </BrowserRouter>
   )

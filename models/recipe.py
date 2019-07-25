@@ -16,6 +16,10 @@ class Recipe(db.Model, BaseModel):
 
     name = db.Column(db.String(40), nullable=False, unique=True)
     cuisine = db.relationship('Cuisine', secondary=recipes_cuisines, backref='recipes')
+    serves = db.Column(db.Integer)
+    scalable = db.Column(db.String(10))
+    prep_time = db.Column(db.String)
+    cook_time = db.Column(db.String)
     ingredients = db.Column(db.String(), nullable=False)
     instructions = db.Column(db.Text, nullable=False)
     link = db.Column(db.String(160))
