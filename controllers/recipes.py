@@ -30,6 +30,7 @@ def create():
     if not is_unique(model=Recipe, key='name', value=data.get('name')):
         errors['name'] = errors.get('name', []) +['Recipe may already exist - please check against current database or re-name your recipe']
     if errors:
+        print(errors)
         return jsonify(errors), 422
     # Adding cuisine
     cuisines = data['cuisines_id']

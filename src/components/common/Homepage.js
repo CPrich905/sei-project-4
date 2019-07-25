@@ -11,10 +11,8 @@ class Homepage extends Component {
 
   componentDidMount() {
     axios.get('/api/recipes')
-
       .then(res => this.setState({ recipes: res.data }))
       .catch(err => console.log(err))
-
   }
 
 

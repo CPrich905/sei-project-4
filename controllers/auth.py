@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, g
 from models.user import User, UserSchema
 from lib.helpers import is_unique
+from lib.secure_route import secure_route
 
 api = Blueprint('auth', __name__)
 user_schema = UserSchema()
@@ -29,3 +30,9 @@ def login():
         'token': user.generate_token(),
         'message': f'Welcome back {user.username}, let\'s get cooking!'
     }), 200
+
+@api.route('/profile')
+@secure_route
+def userprofile():
+
+    return user_schema.jsonify(g.current_user), 200

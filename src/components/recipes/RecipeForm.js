@@ -1,9 +1,10 @@
 import React from 'react'
 import Select from 'react-select'
 // import TimePicker  from 'react-time-picker'
-import { cuisine } from './FormComponents/Cuisine'
+// import { cuisine } from './FormComponents/Cuisine'
 
-const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTimeMin, handleCuisine }) => (
+const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTimeMin, cuisines, handleCuisine }) => (
+
   <form onSubmit={handleSubmit}>
     <div className="field">
       <label className="label">Name</label>
@@ -20,10 +21,12 @@ const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTime
 
     <div className="field">
       <label className="label">Cuisine</label>
+
       <Select
-        defaultValue = {cuisine[0]}
-        options = {cuisine}
-        onChange = {handleCuisine}
+        defaultValue="Cuisine"
+        options={cuisines}
+        onChange={handleCuisine}
+        isMulti
       />
     </div>
     <div>
