@@ -25,7 +25,7 @@ class Homepage extends Component {
 
       <section className="section">
         <div className="container">
-          <h1>HOMEPAGE</h1>
+          <h1>HOMEPAGE - STYLE</h1>
           <h2>Add login, register & browse options</h2>
         </div>
       </section>

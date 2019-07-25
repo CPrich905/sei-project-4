@@ -29,7 +29,7 @@ class Register extends React.Component {
       <main className="section">
         <section className="container">
           <form onSubmit={this.handleSubmit}>
-            <h2 className="title">REGISTER</h2>
+            <h2 className="title">REGISTER - STYLE</h2>
             <div className="field">
               <label className="label">Username</label>
               <div className="control">
