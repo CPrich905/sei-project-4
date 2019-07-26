@@ -6,7 +6,7 @@ class Login extends React.Component {
   constructor() {
     super()
 
-    this.state = { data: {}, error: '' }
+    this.state = { data: {}, error: '', user: null }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -22,7 +22,8 @@ class Login extends React.Component {
     axios.post('/api/login', this.state.data)
       .then(res => {
         Auth.setToken(res.data.token)
-        this.props.history.push('/')
+        this.props.history.push('/profile')
+        console.log('token', res.data.token)
       })
       .catch(() => this.setState({ error: 'Invalid Credentials '}))
   }
