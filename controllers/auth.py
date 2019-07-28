@@ -34,5 +34,6 @@ def login():
 @api.route('/profile')
 @secure_route
 def userprofile():
-
     return user_schema.jsonify(g.current_user), 200
+
+# GET LIKED RECIPES

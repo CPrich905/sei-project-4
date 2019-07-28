@@ -23,7 +23,6 @@ class Login extends React.Component {
       .then(res => {
         Auth.setToken(res.data.token)
         this.props.history.push('/profile')
-        console.log('token', res.data.token)
       })
       .catch(() => this.setState({ error: 'Invalid Credentials '}))
   }

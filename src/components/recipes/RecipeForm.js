@@ -1,9 +1,9 @@
 import React from 'react'
-import Select from 'react-select'
+// import Select from 'react-select'
 // import TimePicker  from 'react-time-picker'
 // import { cuisine } from './FormComponents/Cuisine'
 
-const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTimeMin, cuisines, handleCuisine }) => (
+const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTimeMin }) => (
 
   <form onSubmit={handleSubmit}>
     <div className="field">
@@ -18,17 +18,7 @@ const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTime
         />
       </div>
     </div>
-
-    <div className="field">
-      <label className="label">Cuisine</label>
-
-      <Select
-        defaultValue="Cuisine"
-        options={cuisines}
-        onChange={handleCuisine}
-        isMulti
-      />
-    </div>
+    
     <div>
       <label>Prep time</label>
       <div className="field">
@@ -140,3 +130,27 @@ const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTime
 )
 
 export default RecipeForm
+
+// tags, handleTags, cuisines, handleCuisine
+
+// <div className="field">
+//   <label className="label">Cuisine</label>
+//
+//   {...cuisine.map((cuisine, i)  => (<Select
+//     key={i}
+//     defaultValue="Cuisine"
+//     onChange={handleCuisine}
+//     isMulti
+//   />
+//   ))}
+// </div>
+// <div className="field">
+//   <label className="label">Tags</label>
+//
+//   <Select
+//     defaultValue="Tags"
+//     options={tags}
+//     onChange={handleTags}
+//     isMulti
+//   />
+// </div>

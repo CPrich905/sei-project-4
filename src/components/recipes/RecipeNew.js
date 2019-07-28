@@ -7,7 +7,7 @@ class RecipeCreate extends React.Component {
   constructor() {
     super()
 
-    this.state = { data: {}, cuisines: [] }
+    this.state = { data: {}, cuisines: [], tags: [] }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleTimeHr = this.handleTimeHr.bind(this)
@@ -17,11 +17,14 @@ class RecipeCreate extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/cuisines')
-      .then(res => {
-        this.setState({ cuisines: res.data })
-      })
-      .catch(err => console.log(err))
+    axios.all([
+      axios.get('/api/cuisines'),
+      axios.get('/api/tags')
+    ])
+      .then(axios.spread((cuisines, tags) => {
+        this.setState({ cuisines, tags })
+      }))
+
   }
 
   handleChange({ target: {name, value}}) {
@@ -40,12 +43,24 @@ class RecipeCreate extends React.Component {
   }
 
   formatCuisines(cuisines) {
+    console.log('format cuisines.data', cuisines.data)
+    console.log('trying to map', cuisines.map(cuisine => cuisine.name))
     return cuisines.map(cuisine => ({ value: cuisine.id, label: cuisine.name }))
+  }
+
+  formatTags(tags) {
+    return tags.map(tag => ({ value: tag.id, label: tag.name}))
   }
 
   handleCuisine(selected) {
     const cuisines = selected.map(selection => selection.value)
     const data = {...this.state.data, cuisines_id: cuisines}
+    this.setState({ data })
+  }
+
+  handleTags(selected) {
+    const tags = selected.map(selection => selection.value)
+    const data = {...this.state.data, tags_id: tags}
     this.setState({ data })
   }
 
@@ -71,8 +86,7 @@ class RecipeCreate extends React.Component {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             handleTimeHr={this.handleTimeHr}
-            handleCuisine={this.handleCuisine}
-            cuisines={this.formatCuisines(this.state.cuisines)}
+            cuisines={this.state.cuisines}
           />
         </div>
       </main>

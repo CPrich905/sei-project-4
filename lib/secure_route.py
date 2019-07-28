@@ -8,6 +8,7 @@ def secure_route(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         if 'Authorization' not in request.headers:
+            print('this hit')
             return jsonify({'message': 'Unauthorised'}), 401
 
         token = request.headers.get('Authorization').replace('Bearer ', '')

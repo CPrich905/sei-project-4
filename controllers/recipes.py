@@ -65,3 +65,15 @@ def delete(recipe_id):
         return jsonify({'message': 'Not Found'}), 422
     recipe.remove()
     return '', 204
+
+# LIKES
+@api.route('/recipes/<int:recipe_id>/like', methods=['POST'])
+@secure_route
+def like(recipe_id):
+    print('this got here')
+    recipe = Recipe.query.get(recipe_id)
+    if not recipe:
+        return jsonify({'message': 'Not Found'}), 404
+    recipe.liked_by.append(g.current_user)
+    recipe.save()
+    return recipe_schema.jsonify(recipe), 201

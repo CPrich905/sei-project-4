@@ -7,6 +7,8 @@ from config.environment import secret
 from .base import BaseModel, BaseSchema
 
 
+
+
 class User(db.Model, BaseModel):
     __tablename__ = 'users'
 
@@ -54,7 +56,8 @@ class UserSchema(ma.ModelSchema, BaseSchema):
 
     password = fields.String(required=True)
     password_confirmation = fields.String(required=True)
-    # created_recipes = fields.Nested('RecipeSchema', many=True, only='name', 'id')
+    created_recipes = fields.Nested('RecipeSchema', many=True, only=('name', 'id'))
+    likes = fields.Nested('RecipeSchema', many=True, only=('name', 'id'))
 
 
     class Meta:
