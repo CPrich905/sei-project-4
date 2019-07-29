@@ -21,7 +21,9 @@ class RecipeCreate extends React.Component {
       axios.get('/api/cuisines'),
       axios.get('/api/tags')
     ])
-      .then(axios.spread((cuisines, tags) => {
+      .then(axios.spread((cuisinesData, tagsData) => {
+        const cuisines = this.formatCuisines(cuisinesData.data)
+        const tags = this.formatTags(tagsData.data)
         this.setState({ cuisines, tags })
       }))
 
@@ -43,8 +45,6 @@ class RecipeCreate extends React.Component {
   }
 
   formatCuisines(cuisines) {
-    console.log('format cuisines.data', cuisines.data)
-    console.log('trying to map', cuisines.map(cuisine => cuisine.name))
     return cuisines.map(cuisine => ({ value: cuisine.id, label: cuisine.name }))
   }
 
@@ -80,13 +80,13 @@ class RecipeCreate extends React.Component {
     return (
       <main className="section">
         <div className="container">
-          <h2>NEW RECIPE</h2>
           <RecipeForm
             data={this.state.data}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             handleTimeHr={this.handleTimeHr}
             cuisines={this.state.cuisines}
+            tags={this.state.tags}
           />
         </div>
       </main>
