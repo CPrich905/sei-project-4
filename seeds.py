@@ -79,7 +79,11 @@ with app.app_context():
         img='https://www.cookforyourlife.org/wp-content/uploads/2018/08/Spinach-Omlette-696x465.jpg',
         video='video.link',
         liked_by=[charlie],
-        tags=[quick, easy, budget]
+        tags=[quick, easy, budget],
+        serves=1,
+        prep_time_min=15,
+        cook_time_min=15,
+        description="A quick, easy lunch or dinner for any night of the week!"
     )
     tuna_salad = Recipe(
         name='Tuna pasta salad',
@@ -92,7 +96,11 @@ with app.app_context():
         img='http://cdn.recipes100.com/v/afe016c95b80f4910a368f8f5eb38754.jpg',
         video='video.link',
         liked_by=[izzi],
-        tags=[quick, easy, budget, summer]
+        tags=[quick, easy, budget, summer],
+        serves=4,
+        prep_time_min=15,
+        cook_time_min=15,
+        description="A delicious summer salad combining sweet peppers and peppery rocket for a light, fresh meal any day of the week - perfect to load into packed lunches too!"
     )
     jacket_feta = Recipe(
         name='Jacket Potato with feta and sumac',
@@ -103,7 +111,11 @@ with app.app_context():
         2. Meanwhile, crumble the feta into a bowl, add the yogurt and whisk together until creamy. Stir in the red pepper with a good grind of black pepper and spoon the whipped feta into the jacket. Sprinkle with the sumac, drizzle over the remaining 1 tsp olive oil and scatter a few torn basil leaves on top, if you like.''',
         img='https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2017/01/jacket-potato.jpg?itok=jFmhmfQn',
         video='video.link',
-        tags=[easy, budget, autumn]
+        tags=[easy, budget, autumn],
+        serves=1,
+        prep_time_min=15,
+        cook_time_min=45,
+        description="A mediterranean twist on a British classic, the zesty sumac is a fantastic contrast to the creamy feta."
     )
     couscous_salad = Recipe(
         name='Summer couscous salad',
@@ -115,7 +127,10 @@ with app.app_context():
         3. If the pan is dry, pour in a little more oil and heat it up, then add the halloumi strips and fry for 2-3 minutes, turning them over from time to time, until crisp and sizzled brown. Pile on top of the tomatoes, and drizzle with the remaining dressing. Serve as soon as possible.''',
         img='https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe_images/recipe-image-legacy-id--315542_12.jpg?itok=mvxVQelb',
         video='video.link',
-        tags=[summer, family]
+        tags=[summer, family],
+        serves=4,
+        prep_time_min=45,
+        description="A hearty couscous salad capturing the flavours of summer, this is perfect for a picnic lunch!"
     )
     veg_tagine = Recipe(
         name='Vegetable tagine with apricot quinoa',
@@ -128,7 +143,11 @@ with app.app_context():
         4. Serve the quinoa with the tagine, and drizzle the tahini dressing over the top. Scatter over some chopped coriander and mint and the pomegranate seeds, if using, to finish.''',
         img='https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2017/03/vege-tagine-with-apricot-quinoa.jpg?itok=bKeby8k5',
         video='video.link',
-        tags=[summer, family]
+        tags=[summer, family],
+        serves=4,
+        prep_time_min=30,
+        cook_time_min=45,
+        description="This fantasticly colourful summer dish is not only a great source of iron and contains all of your recommended 5 a day, but it's also vegan... not that you'd know from tasting it!"
     )
 
 

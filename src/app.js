@@ -20,6 +20,7 @@ const App = () => {
   return(
     <BrowserRouter>
       <main>
+        <Saucepan />
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />

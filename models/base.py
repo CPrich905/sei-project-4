@@ -8,6 +8,7 @@ class BaseModel:
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def save(self):
+        #pylint: disable=W0201
         self.update_at = datetime.utcnow()
         db.session.add(self)
         db.session.commit()

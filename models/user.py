@@ -57,7 +57,7 @@ class UserSchema(ma.ModelSchema, BaseSchema):
     password = fields.String(required=True)
     password_confirmation = fields.String(required=True)
     created_recipes = fields.Nested('RecipeSchema', many=True, only=('name', 'id'))
-    likes = fields.Nested('RecipeSchema', many=True, only=('name', 'id'))
+    likes = fields.Nested('RecipeSchema', many=True, only=('name', 'id', 'img'))
 
 
     class Meta:

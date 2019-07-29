@@ -35,7 +35,8 @@ class Recipe(db.Model, BaseModel):
     scalable = db.Column(db.String(10))
     prep_time_hr = db.Column(db.Integer)
     prep_time_min = db.Column(db.Integer)
-    cook_time = db.Column(db.String)
+    cook_time_hr = db.Column(db.Integer)
+    cook_time_min = db.Column(db.Integer)
     ingredients = db.Column(db.String(), nullable=False)
     instructions = db.Column(db.Text, nullable=False)
     link = db.Column(db.String(160))
@@ -45,10 +46,13 @@ class Recipe(db.Model, BaseModel):
     chef = db.relationship('User', backref='created_recipes')
     liked_by = db.relationship('User', secondary=likes, backref='likes')
     is_active = db.Column(db.Boolean, default=False)
+    description = db.Column(db.String(200))
 
 class RecipeSchema(ma.ModelSchema, BaseSchema):
     class Meta:
         model = Recipe
 
     chef = fields.Nested('UserSchema', only=('id', 'username'))
+    cuisine = fields.Nested('CuisineSchema', many=True, only=('id', 'name'))
+    tags = fields.Nested('TagSchema', many=True, only=('id', 'name'))
     liked_by = fields.Nested('UserSchema', many=True, only=('id', 'username'))

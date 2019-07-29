@@ -18,7 +18,7 @@ const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTime
         />
       </div>
     </div>
-    
+
     <div>
       <label>Prep time</label>
       <div className="field">
@@ -135,7 +135,8 @@ export default RecipeForm
 
 // <div className="field">
 //   <label className="label">Cuisine</label>
-//
+//  create select outside then map options NOT select
+    // first option should blank/"pick a cuisine"
 //   {...cuisine.map((cuisine, i)  => (<Select
 //     key={i}
 //     defaultValue="Cuisine"

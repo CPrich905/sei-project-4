@@ -20,13 +20,7 @@ class Homepage extends Component {
     if(!this.state.recipes) return null
 
     return (
-
-      <section className="section">
-        <div className="container">
-          <h1>HOMEPAGE - STYLE</h1>
-          <h2>Add login, register & browse options</h2>
-        </div>
-      </section>
+      <img id="home-img" src="https://i.imgur.com/ZrIaWV1.jpg"/>
     )
   }
 }
