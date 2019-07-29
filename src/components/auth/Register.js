@@ -23,7 +23,7 @@ class Register extends React.Component {
   }
 
   render() {
-    // console.log(this.state)
+  
     return(
       <main className="section">
         <section className="container">
@@ -38,8 +38,8 @@ class Register extends React.Component {
                   placeholder="Username"
                   onChange={this.handleChange}
                 />
+                {this.state.errors.username && <p className="help is-danger">{this.state.errors.username}</p>}
               </div>
-              {this.state.errors.username && <small className="help is-danger">{this.state.errors.username}</small>}
             </div>
             <div className="field">
               <label className="label">Email</label>

@@ -32,7 +32,7 @@ class Login extends React.Component {
       <main className="section">
         <div className="container">
           <form onSubmit={this.handleSubmit}>
-            <h2 className="title">Login STYLE!</h2>
+            <h2 className="title">Login</h2>
             <div className="field">
               <label className="field">
                 <div className="control">

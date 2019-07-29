@@ -2,7 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 
 
-const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTimeMin, cuisines, tags }) => (
+const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTimeMin, cuisines, tags, handleCuisine, handleTags, ingredient, ingredientChange, handleIngredient, ingredients, instruction, instructionChange, handleInstruction, instructions }) => (
 
   <form onSubmit={handleSubmit}>
     <div className="field">
@@ -98,12 +98,19 @@ const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTime
     <hr />
     <div className="container">
       <p className="title">Cuisines and tags</p>
-      <p>You can select as many of these as you like - if you think we're missing one, please let us know!</p>
+      <p>Either pick from the drop down lists or start typing to add cuisines and tags to your recipe. <br /> You can select as many of these as you like - if you think we're missing one, please let us know!</p>
       <label className="label">Cusines</label>
-      <Select isMulti options={cuisines} />
+      <Select isMulti
+        value={cuisines.value}
+        onChange={handleCuisine}
+        options={cuisines} />
 
       <label className="label">Tags</label>
-      <Select isMulti options={tags} />
+      <Select
+        isMulti
+        value={tags.value}
+        onChange={handleTags}
+        options={tags} />
     </div>
 
     <hr />
@@ -113,27 +120,51 @@ const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTime
       <br />
       <br />
       <div className="control">
-        <textarea
+        {ingredients.map((ingredient, i) => (
+          <p
+            key={i}>
+            {ingredient}
+          </p>
+        ))}
+        <input
+          type="text"
           className="textarea"
           name="ingredients"
           placeholder="Ingredients"
-          onChange={handleChange}
-          value={data.ingredients || ''}
-          rows="10"
+          onChange={ingredientChange}
+          value={ingredient}
         />
+        <button
+          type="button"
+          onClick={handleIngredient}>
+          Add ingredient
+        </button>
       </div>
     </div>
 
     <div className="field">
       <div className="control">
-        <textarea
+        {instructions.map((instruction, i) => (
+          <div
+            key={i}>
+            <p>{instruction}</p>
+            <button></button>
+          </div>
+
+        ))}
+        <input
+          type="text"
           className="textarea"
           name="instructions"
           placeholder="Instructions"
-          onChange={handleChange}
-          value={data.instructions || ''}
-          rows="10"
+          onChange={instructionChange}
+          value={instruction}
         />
+        <button
+          type="button"
+          onClick={handleInstruction}>
+          Add instruction
+        </button>
       </div>
     </div>
 

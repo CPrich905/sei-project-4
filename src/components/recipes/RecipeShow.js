@@ -6,13 +6,12 @@ import { Link } from 'react-router-dom'
 class RecipeShow extends React.Component {
   constructor () {
     super()
-    this.state = { recipe: null, user: null, shoppingList: [] }
+    this.state = { recipe: null, user: null, shoppingList: [], instructions: [] }
 
     this.deleteRecipe = this.deleteRecipe.bind(this)
   }
 
   handleLike() {
-    console.log('like is firing')
     axios.post(`/api/recipes/${this.state.recipe.id}/like`, null, {
       headers: { Authorization: `Bearer ${Auth.getToken()}`}
     })
@@ -23,7 +22,12 @@ class RecipeShow extends React.Component {
   componentDidMount() {
     axios.get(`/api/recipes/${this.props.match.params.id}`)
       .then(res =>
-        this.setState({ recipe: res.data, user: res.data.chef.id, shoppingList: [...JSON.parse(res.data.ingredients)] }))
+        this.setState({
+          recipe: res.data,
+          user: res.data.chef.id,
+          shoppingList: JSON.parse(res.data.ingredients),
+          instructions: JSON.parse(res.data.instructions)
+        }))
       .catch(err => console.log(err))
   }
 
@@ -44,8 +48,9 @@ class RecipeShow extends React.Component {
 
   render() {
     if (!this.state.recipe) return null
-    const { recipe, shoppingList } = this.state
+    const { recipe, shoppingList, instructions } = this.state
     console.log(this.state.shoppingList)
+    console.log(this.state.instructions)
     return (
       <div className="section">
         <div className="container">
@@ -75,7 +80,9 @@ class RecipeShow extends React.Component {
               </article>
               <article className="tile is-child is-8">
                 <p className="title">Instructions</p>
-                <div className="content">{recipe.instructions}</div>
+                <div className="content">
+                  {instructions.map((instruction, i) => <p key={i}>{instruction}</p>)}
+                </div>
               </article>
             </div>
             <div className="tile is-parent is-4">
@@ -83,7 +90,7 @@ class RecipeShow extends React.Component {
                 <div className="content">
                   <p className="title">Ingredients</p>
                   <div className="content">
-                    {shoppingList}
+                    {shoppingList.map((ingredient, i) => <p key={i}>{ingredient}</p>)}
                   </div>
                 </div>
               </article>

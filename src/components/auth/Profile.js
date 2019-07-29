@@ -10,7 +10,7 @@ class Profile extends React.Component {
     super()
 
     this.state = { user: null, shoppingList: [], storecupboard: [], storecupboardItem: '' }
-    this.handleClick = this.handleClick.bind(this)
+    this.recipeActivated = this.recipeActivated.bind(this)
     this.storeCupChange = this.storeCupChange.bind(this)
     this.storeCupSubmit = this.storeCupSubmit.bind(this)
     this.storeCupDelete = this.storeCupDelete.bind(this)
@@ -37,9 +37,8 @@ class Profile extends React.Component {
     return Auth.isAuthenticated() && Auth.getPayload().sub === this.state.profile.user.id
   }
 
-  handleClick({ id }){
-    const user = this.state.user
-    console.log(user.likes)
+  recipeActivated({ id }){
+
     axios.get(`/api/recipes/${id}`)
       .then(res => this.setState({ shoppingList: [...this.state.shoppingList, ...JSON.parse(res.data.ingredients)] }))
       .catch(err => console.log(err))
@@ -113,13 +112,15 @@ class Profile extends React.Component {
                     {user.likes.map(like =>
                       <div
                         key={like.id}
-                        onClick={() => this.handleClick(like)}>
+                        onClick={() => this.recipeActivated(like)}>
                         <p className="title">{like.name}</p>
+                        <a
+                          className="button"
+                          onClick={() => this.recipeActivated(like)}>Add ingredients to shopping list</a>
                         <figure className="image">
                           <img src={like.img} />
                         </figure>
                       </div>
-
                     )}
                   </div>
                 </article>

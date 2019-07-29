@@ -7,13 +7,17 @@ class RecipeCreate extends React.Component {
   constructor() {
     super()
 
-    this.state = { data: {}, cuisines: [], tags: [] }
+    this.state = { data: {}, cuisines: [], tags: [], ingredients: [], newIngredient: '', instructions: [], newInstruction: '' }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleTimeHr = this.handleTimeHr.bind(this)
     this.handleTimeMin = this.handleTimeMin.bind(this)
     this.handleCuisine = this.handleCuisine.bind(this)
-
+    this.handleTags = this.handleTags.bind(this)
+    this.handleIngredient = this.handleIngredient.bind(this)
+    this.ingredientChange = this.ingredientChange.bind(this)
+    this.handleInstruction = this.handleInstruction.bind(this)
+    this.instructionChange = this.instructionChange.bind(this)
   }
 
   componentDidMount() {
@@ -64,9 +68,30 @@ class RecipeCreate extends React.Component {
     this.setState({ data })
   }
 
+  ingredientChange(e){
+    this.setState({ newIngredient: e.target.value })
+  }
+
+  handleIngredient(){
+    const ingredients = [...this.state.ingredients, this.state.newIngredient]
+    this.setState({ ingredients, newIngredient: '' })
+  }
+
+  instructionChange(e){
+    this.setState({ newInstruction: e.target.value })
+  }
+
+  handleInstruction(){
+    const instructions = [...this.state.instructions, this.state.newInstruction]
+    this.setState({ instructions, newInstruction: '' })
+  }
+
+
   handleSubmit(e) {
     e.preventDefault()
     const data = this.state.data
+    data.ingredients = JSON.stringify(this.state.ingredients)
+    data.instructions = JSON.stringify(this.state.instructions)
     axios.post('/api/recipes', data, {
       headers: { 'Authorization': `${Auth.getToken()}` }
     })
@@ -76,7 +101,6 @@ class RecipeCreate extends React.Component {
 
 
   render() {
-
     return (
       <main className="section">
         <div className="container">
@@ -85,8 +109,18 @@ class RecipeCreate extends React.Component {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             handleTimeHr={this.handleTimeHr}
+            handleCuisine={this.handleCuisine}
+            handleTags={this.handleTags}
             cuisines={this.state.cuisines}
             tags={this.state.tags}
+            ingredient={this.state.newIngredient}
+            ingredients={this.state.ingredients}
+            handleIngredient={this.handleIngredient}
+            ingredientChange={this.ingredientChange}
+            instruction={this.state.newInstruction}
+            instructions={this.state.instructions}
+            handleInstruction={this.handleInstruction}
+            instructionChange={this.instructionChange}
           />
         </div>
       </main>

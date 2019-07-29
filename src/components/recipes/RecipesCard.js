@@ -5,7 +5,7 @@ import Auth from '../../lib/Auth'
 // img, chef, cuisines, tags
 
 
-const RecipesCard = ({ name, img, id, serves, prep_time_hr, prep_time_min, description, cuisine, tags }) => (
+const RecipesCard = ({ name, img, id, serves, prep_time_hr, prep_time_min, description, cuisine, tags, handleLike }) => (
   <div className="column is-one-third-desktop is-half-tablet">
     <Link to={`/recipes/${id}`}>
       <div className="card">
@@ -29,7 +29,7 @@ const RecipesCard = ({ name, img, id, serves, prep_time_hr, prep_time_min, descr
 
         </div>
         <div className="card-footer">
-          {Auth.isAuthenticated() && <button className="button" onClick={() => this.handleLike()}>Like</button>}
+          {Auth.isAuthenticated() && <button className="button" onClick={() => handleLike(id)}>Like</button>}
 
         </div>
       </div>

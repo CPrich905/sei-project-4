@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
+import Auth from '../../lib/Auth'
 import axios from 'axios'
 
 import RecipeCard from './RecipesCard'
@@ -9,7 +10,7 @@ class RecipesIndex extends Component {
     super()
 
     this.state = { recipes: null, cuisines: [], tags: [] }
-
+    this.handleLike = this.handleLike.bind(this)
   }
 
   componentDidMount() {
@@ -24,6 +25,7 @@ class RecipesIndex extends Component {
       .then(res => this.setState({ recipes: res.data}))
       .catch(err => console.log(err))
   }
+
   // getCuisines(){
   //   axios.get('/api/cuisines')
   //     .then(res => this.setState({ cuisines: res.data }))
@@ -49,9 +51,17 @@ class RecipesIndex extends Component {
   // }
 
 
+  handleLike(id) {
+    axios.post(`/api/recipes/${id}/like`, null, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}`}
+    })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
+  }
+
+
   render() {
     if(!this.state.recipes) return null
-    console.log('recipes rendered', this.state.recipes)
     return (
       <section className="section">
         <div className="container">
@@ -60,6 +70,7 @@ class RecipesIndex extends Component {
               <RecipeCard
                 key={recipe.id}
                 {...recipe}
+                handleLike={this.handleLike}
               />
             )}
 

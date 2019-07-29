@@ -38,7 +38,7 @@ class Recipe(db.Model, BaseModel):
     cook_time_hr = db.Column(db.Integer)
     cook_time_min = db.Column(db.Integer)
     ingredients = db.Column(db.String(), nullable=False)
-    instructions = db.Column(db.Text, nullable=False)
+    instructions = db.Column(db.String(), nullable=False)
     link = db.Column(db.String(160))
     img = db.Column(db.String(160))
     video = db.Column(db.String(160))
