@@ -32,7 +32,6 @@ class RecipeCreate extends React.Component {
         const tags = this.formatTags(tagsData.data)
         this.setState({ cuisines, tags })
       }))
-
   }
 
   handleChange({ target: {name, value}}) {

@@ -125,7 +125,7 @@ const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTime
           <div
             key={i}
             value={ingredient}
-            onClick={(e)=> deleteIngredient(e, i)}>
+            onClick={(e) => deleteIngredient(e, i)}>
             {ingredient}
           </div>
         ))}

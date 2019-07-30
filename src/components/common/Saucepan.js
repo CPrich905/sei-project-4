@@ -19,7 +19,7 @@ class Saucepan extends React.Component {
       <nav className="navbar is-light">
         <div className="navbar-brand">
           <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-item">
+            <a className="navbar-item" href="/recipes">
               <img src="../../assets/sauce-pan-icon.png" width="80" height="80" alt="Recipes"/>
             </a>
             <div className="navbar-menu">
@@ -28,7 +28,7 @@ class Saucepan extends React.Component {
             </div>
             <div className="navbar-end">
               <div className="navbar-item">
-                <Link className="navbar-item" id="links" to="/recipes">Index</Link>
+                <Link className="navbar-item" id="links" to="/recipes">Recipes</Link>
                 {Auth.isAuthenticated() && <Link className="navbar-item" id="links" to="/recipes/new"> Submit new recipe</Link>}
                 {!Auth.isAuthenticated() && <Link className="navbar-item" id="links" to="/login">Login</Link>}
                 {!Auth.isAuthenticated() && <Link className="navbar-item" id="links" to="/register">Register</Link>}

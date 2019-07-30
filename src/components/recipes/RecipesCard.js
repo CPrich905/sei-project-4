@@ -29,7 +29,7 @@ const RecipesCard = ({ name, img, id, serves, prep_time_hr, prep_time_min, descr
 
         </div>
         <div className="card-footer">
-          {Auth.isAuthenticated() && <button className="button" onClick={() => handleLike(id)}>Like</button>}
+          {Auth.isAuthenticated() && <button className="button is-primary is-fullwidth" onClick={() => handleLike(id)}>Like</button>}
 
         </div>
       </div>

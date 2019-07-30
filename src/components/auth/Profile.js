@@ -14,6 +14,7 @@ class Profile extends React.Component {
     this.storeCupChange = this.storeCupChange.bind(this)
     this.storeCupSubmit = this.storeCupSubmit.bind(this)
     this.storeCupDelete = this.storeCupDelete.bind(this)
+    this.ingredientClicked = this.ingredientClicked.bind(this)
   }
 
   logout() {
@@ -44,8 +45,16 @@ class Profile extends React.Component {
       .catch(err => console.log(err))
   }
 
+  ingredientClicked(e, i){
+    const shoppingList = this.state.shoppingList
+    const newShoppingList = shoppingList.filter((ingredient, id) => {
+      return id !== i
+    })
+    this.setState({ shoppingList: newShoppingList })
+    console.log(newShoppingList)
+  }
+
   recipeClicked(e, i) {
-    console.log(i.id)
     this.props.history.push(`/recipes/${i.id}`)
   }
 
@@ -56,21 +65,15 @@ class Profile extends React.Component {
   storeCupSubmit(e) {
     e.preventDefault()
     const storecupboard = [...this.state.storecupboard, this.state.storecupboardItem]
-    this.setState({ storecupboard }, () => this.setState( { storecupboardItem: '' } ))
+    this.setState({ storecupboard, storecupboardItem: '' })
   }
 
-  storeCupDelete(e){
-    e.preventDefault()
-    const cupboard = this.state.storecupboard
-    const index = cupboard.indexOf(e.target.value)
-    const storecupboard = [ ...this.state.storecupboard ]
-
-    const newstorecupboard =  index >= 0 ? [
-      storecupboard.slice(0, index),
-      storecupboard.slice(index + 1)
-    ] : storecupboard
-
-    this.setState({ storecupboard: [...newstorecupboard] })
+  storeCupDelete(e, index){
+    const storecupboard = this.state.storecupboard
+    const newCupboard = storecupboard.filter((ingredient, id) => {
+      return id !== index
+    })
+    this.setState({ storecupboard: newCupboard })
 
   }
 
@@ -84,38 +87,42 @@ class Profile extends React.Component {
           <div className="tile is-ancestor">
             <div className="tile is-8 is-vertical">
               <div className="tile">
-                <article className="tile is-child is-4">
+                <article className="tile is-child">
                   <div className="content">
                     <p className="title">Welcome back {user.username}!</p>
-                    <p>Your favourite recipes are listed below - click to add the ingredients to your shopping list. You can add your staple ingredients or key items you want to use to your store cupboard here too.</p>
+                    <p>Add your stock ingredients in the store-cupboard box to the right. These are things that you always have on hand - you can delete these later just by clicking on them, or add more if you need to.</p>
+                    <hr />
+                    <p>Your favourite recipes are listed below - click to add the ingredients to your shopping list, then check against your storecupboard before you head to the shops. Already have an item in your storecupboard? Just click to remove it from your shopping list.</p>
                   </div>
                 </article>
-              </div>
-              <div className="tile is-child">
                 <article className="tile is-child is-4">
                   <div className="content">
                     <StoreCupboard
                       storeCupSubmit={this.storeCupSubmit}
                       storeCupChange={this.storeCupChange}
+                      storecupboardItem={this.state.storecupboardItem}
                     />
-                    {this.state.storecupboard.map((item, index) => (
-                      <div key={index}>
+                    {this.state.storecupboard.map((item, i) => (
+                      <div
+                        key={i}
+                        value={item}
+                        onClick={(e) => this.storeCupDelete(e, i)}>
                         <p>{item}</p>
-                        <button onClick={this.storeCupDelete} value={item} >Delete item</button>
-                        {/*add delete button with value of item*/}
                       </div>
                     ))}
                   </div>
                 </article>
               </div>
+
+
               <div className="tile is-parent is-8">
                 <article className="tile is-child">
                   <div className="content">
-                    <p>Your favourites are: </p>
+                    <p className="title">Your favourites are: </p>
                     {user.likes.map((like) =>
                       <div
                         key={like.id}>
-                        <p className="title">{like.name}</p>
+                        <p className="title is-5">{like.name}</p>
                         <a
                           className="button"
                           onClick={() => this.recipeActivated(like)}>Add ingredients to shopping list</a>
@@ -125,6 +132,7 @@ class Profile extends React.Component {
                         <figure className="image">
                           <img src={like.img} />
                         </figure>
+                        <hr />
                       </div>
                     )}
                   </div>
@@ -140,9 +148,11 @@ class Profile extends React.Component {
                     <p className="title">Shopping list</p>
                     <br />
                     <div className="content">
-                      {this.state.shoppingList.map((item, index) =>
+                      {this.state.shoppingList.map((item, i) =>
                         <p
-                          key={index}>
+                          key={i}
+                          value={item}
+                          onClick={(e) => this.ingredientClicked(e, i)}>
                           {item}
                         </p>)}
                     </div>

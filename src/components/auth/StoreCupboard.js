@@ -1,19 +1,22 @@
 import React from 'react'
 
 
-const StoreCupboard = ({ storeCupChange, storeCupSubmit }) => (
-  <form onSubmit={storeCupSubmit}>
+const StoreCupboard = ({ storeCupChange, storeCupSubmit, storecupboardItem }) => (
+  <form>
     <div className="field">
       <label className="label">Add to your store cupboard...</label>
       <br />
-      <textarea
-        className="input"
+      <input
+        type="text"
+        className="textarea"
         name="storeCupboard"
         placeholder="..."
         onChange={storeCupChange}
+        value={storecupboardItem}
       />
     </div>
-    <button>Submit</button>
+    <button
+      onClick={storeCupSubmit}>Submit</button>
   </form>
 )
 

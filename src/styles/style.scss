@@ -12,6 +12,14 @@
 // Profile page
 
 // Recipes Index
+.card {
+    display:flex;
+    flex-direction: column;
+}
+.card-footer {
+    margin-top: auto;
+}
+
 
 // Recipes Show
 
