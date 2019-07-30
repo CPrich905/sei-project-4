@@ -2,7 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 
 
-const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTimeMin, cuisines, tags, handleCuisine, handleTags, ingredient, ingredientChange, handleIngredient, ingredients, instruction, instructionChange, handleInstruction, instructions, deleteInstruction }) => (
+const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTimeMin, cuisines, tags, handleCuisine, handleTags, ingredient, ingredientChange, handleIngredient, ingredients, deleteIngredient, instruction, instructionChange, handleInstruction, instructions, deleteInstruction }) => (
 
   <form onSubmit={handleSubmit}>
     <div className="field">
@@ -118,13 +118,16 @@ const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTime
     <div className="field">
       <label className="title">Ingredients & Instructions</label>
       <br />
+      <p>Add your instructions and ingredients one at a time, you will then see them display above the text box. Don't worry if you make a mistake, you can either edit your recipe later, or click on the ingredient/instruction to delete it.</p>
       <br />
       <div className="control">
         {ingredients.map((ingredient, i) => (
-          <p
-            key={i}>
+          <div
+            key={i}
+            value={ingredient}
+            onClick={(e)=> deleteIngredient(e, i)}>
             {ingredient}
-          </p>
+          </div>
         ))}
         <input
           type="text"

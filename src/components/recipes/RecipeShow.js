@@ -49,8 +49,6 @@ class RecipeShow extends React.Component {
   render() {
     if (!this.state.recipe) return null
     const { recipe, shoppingList, instructions } = this.state
-    console.log(this.state.shoppingList)
-    console.log(this.state.instructions)
     return (
       <div className="section">
         <div className="container">

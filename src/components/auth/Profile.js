@@ -44,6 +44,11 @@ class Profile extends React.Component {
       .catch(err => console.log(err))
   }
 
+  recipeClicked(e, i) {
+    console.log(i.id)
+    this.props.history.push(`/recipes/${i.id}`)
+  }
+
   storeCupChange(e) {
     this.setState({ storecupboardItem: e.target.value })
   }
@@ -68,8 +73,6 @@ class Profile extends React.Component {
     this.setState({ storecupboard: [...newstorecupboard] })
 
   }
-  // remove item from array of storecupboard
-  // spread from state, find item in array, remove from array & set state
 
 
   render(){
@@ -109,14 +112,16 @@ class Profile extends React.Component {
                 <article className="tile is-child">
                   <div className="content">
                     <p>Your favourites are: </p>
-                    {user.likes.map(like =>
+                    {user.likes.map((like) =>
                       <div
-                        key={like.id}
-                        onClick={() => this.recipeActivated(like)}>
+                        key={like.id}>
                         <p className="title">{like.name}</p>
                         <a
                           className="button"
                           onClick={() => this.recipeActivated(like)}>Add ingredients to shopping list</a>
+                        <a
+                          className="button"
+                          onClick={(e) => this.recipeClicked(e, like)}>Go to recipe</a>
                         <figure className="image">
                           <img src={like.img} />
                         </figure>
