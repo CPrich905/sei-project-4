@@ -18,6 +18,7 @@ class RecipeCreate extends React.Component {
     this.ingredientChange = this.ingredientChange.bind(this)
     this.handleInstruction = this.handleInstruction.bind(this)
     this.instructionChange = this.instructionChange.bind(this)
+    this.deleteInstruction = this.deleteInstruction.bind(this)
   }
 
   componentDidMount() {
@@ -74,6 +75,7 @@ class RecipeCreate extends React.Component {
 
   handleIngredient(){
     const ingredients = [...this.state.ingredients, this.state.newIngredient]
+    console.log(ingredients)
     this.setState({ ingredients, newIngredient: '' })
   }
 
@@ -84,6 +86,18 @@ class RecipeCreate extends React.Component {
   handleInstruction(){
     const instructions = [...this.state.instructions, this.state.newInstruction]
     this.setState({ instructions, newInstruction: '' })
+  }
+
+  deleteInstruction(e, index){
+    const instructions = this.state.instructions
+    // const index = instructions.indexOf(e.target)
+    // console.log('index', index)
+    console.log(index)
+    const r = index+1
+    const newInstructions = instructions.slice(r)
+    console.log(newInstructions)
+    // console.log(instructions)
+    // const newInstructions = instructions.filter(() => {})
   }
 
 
@@ -121,6 +135,7 @@ class RecipeCreate extends React.Component {
             instructions={this.state.instructions}
             handleInstruction={this.handleInstruction}
             instructionChange={this.instructionChange}
+            deleteInstruction={this.deleteInstruction}
           />
         </div>
       </main>

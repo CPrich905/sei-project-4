@@ -2,7 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 
 
-const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTimeMin, cuisines, tags, handleCuisine, handleTags, ingredient, ingredientChange, handleIngredient, ingredients, instruction, instructionChange, handleInstruction, instructions }) => (
+const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTimeMin, cuisines, tags, handleCuisine, handleTags, ingredient, ingredientChange, handleIngredient, ingredients, instruction, instructionChange, handleInstruction, instructions, deleteInstruction }) => (
 
   <form onSubmit={handleSubmit}>
     <div className="field">
@@ -146,9 +146,10 @@ const RecipeForm = ({ data, handleChange, handleSubmit, handleTimeHr, handleTime
       <div className="control">
         {instructions.map((instruction, i) => (
           <div
-            key={i}>
-            <p>{instruction}</p>
-            <button></button>
+            key={i}
+            value={instruction}
+            onClick={(e)=> deleteInstruction(e, i)}>
+            {instruction}
           </div>
 
         ))}
