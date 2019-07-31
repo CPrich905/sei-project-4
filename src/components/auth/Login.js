@@ -27,6 +27,7 @@ class Login extends React.Component {
   }
 
   render() {
+    console.log(this.state.error)
     return(
       <main className="section">
         <div className="container">
@@ -43,6 +44,7 @@ class Login extends React.Component {
                   />
                 </div>
               </label>
+              {this.state.error && <small className="help is-danger">{this.state.error}</small>}
             </div>
             <div className="field">
               <label className="field">
