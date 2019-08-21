@@ -9,7 +9,9 @@
     "serve:back": "pipenv run flask run",
     "seed": "pipenv run python seeds.py",
     "build": "webpack -p",
-    "postinstall": "[ \"$NODE_ENV\" = \"production\" ] && yarn build || exit 0"
+    "postinstall": "[ \"$NODE_ENV\" = \"production\" ] && yarn build || exit 0",
+    "serve:react": "webpack-dev-server",
+    "serve:flask": "pipenv run flask run -p 4000"
   },
   "author": "",
   "license": "ISC",
