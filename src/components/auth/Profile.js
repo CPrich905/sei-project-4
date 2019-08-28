@@ -39,7 +39,6 @@ class Profile extends React.Component {
   }
 
   recipeActivated({ id }){
-
     axios.get(`/api/recipes/${id}`)
       .then(res => this.setState({ shoppingList: [...this.state.shoppingList, ...JSON.parse(res.data.ingredients)] }))
       .catch(err => console.log(err))
@@ -51,7 +50,6 @@ class Profile extends React.Component {
       return id !== i
     })
     this.setState({ shoppingList: newShoppingList })
-    console.log(newShoppingList)
   }
 
   recipeClicked(e, i) {
@@ -139,8 +137,6 @@ class Profile extends React.Component {
                 </article>
               </div>
             </div>
-
-
             <div className="tile is-parent is-4">
               <article className="tile is-child">
                 <div className="content">
