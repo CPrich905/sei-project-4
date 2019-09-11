@@ -9,7 +9,7 @@ Our final project was an opportunity to showcase our abilities so far. We had th
 
 * The end-state must be a full-stack application making your own backend and your own front-end
 
-* Use a PYTHON FLASK API to serve data from a Postgres SQL database
+* Use a PYTHON FLASK API to serve data from a PostgreSQL database
 
 * Consume API with a separate front-end built with React
 
